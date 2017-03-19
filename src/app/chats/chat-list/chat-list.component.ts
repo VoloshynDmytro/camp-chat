@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Chat } from '../shared/chat.model';
 
 @Component({
   selector: 'ct-chat-list',
@@ -9,20 +10,15 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 
 export class ChatListComponent implements OnInit {
 
-  selectedId: number;
+  @Input() chats: Promise<Chat[]>;
 
-  constructor(private route: ActivatedRoute,
-              private router: Router) {
-
-  }
+  constructor(private router: Router) {}
 
   ngOnInit() {
 
   }
 
-  select(chat) {
-    this.selectedId = chat.id;
-
+  select(chat: Chat) {
     // Navigate with relative link
     this.router.navigate(['chat', chat.id])
   }
